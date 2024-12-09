@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .todo-container {
+            background-color: #1c1c1c;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Title */
+        h1 {
+            color: #00aaff;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        /* Input */
+        .todo-input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            outline: none;
+            background-color: #2c2c2c;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        /* Button */
+        .add-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #00aaff;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #0088cc;
+        }
+
+        /* List */
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-item {
+            background-color: #2c2c2c;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .todo-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        .todo-item button {
+            background-color: #ff4d4d;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .todo-item button:hover {
+            background-color: #e33a3a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .todo-container {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="todo-container">
+        <h1>To Do List</h1>
+        <input type="text" class="todo-input" placeholder="Add a new task..." id="new-task">
+        <button class="add-btn" onclick="addTask()">Add Task</button>
+
+        <ul class="todo-list" id="todo-list">
+            <!-- Dynamic list will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        // Add Task function
+        function addTask() {
+            var taskInput = document.getElementById("new-task");
+            var taskValue = taskInput.value;
+
+            if (taskValue.trim() === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            var taskList = document.getElementById("todo-list");
+
+            // Create new task item
+            var li = document.createElement("li");
+            li.className = "todo-item";
+            li.innerHTML = `
+                <span>${taskValue}</span>
+                <button onclick="removeTask(this)">Delete</button>
+            `;
+
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+
+        // Remove Task function
+        function removeTask(button) {
+            var taskItem = button.parentNode;
+            taskItem.remove();
+        }
+    </script>
+    
+</body>
+</html>
